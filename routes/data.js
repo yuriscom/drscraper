@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const config = require(__dirname + "/../config.json");
 
 router.get('/scrape', function (req, res, next) {
   var qAr = [];
