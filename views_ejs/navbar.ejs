@@ -1,0 +1,9 @@
+<nav class="w3-bar w3-border w3-light-grey" role="navigation">
+    <div class="w3-bar-item w3-text-grey">Scraper</div>
+    <a class="w3-bar-item w3-button" href="/">Home</a>
+    <%if (user) {%>
+        <a class="w3-bar-item w3-button" id="qsLogoutBtn" href="/logout">Log Out</a>
+    <%} else {%>
+        <a class="w3-bar-item w3-button" id="qsLoginBtn" href="/login">Log In</a>
+    <%} %>
+</nav>

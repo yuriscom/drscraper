@@ -1,0 +1,4 @@
+node_modules/
+.env
+npm-debug.log
+tasks/generators/data/*.xlsx

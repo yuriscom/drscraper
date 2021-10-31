@@ -1,0 +1,36 @@
+{
+  "name": "auth0-nodejs-webapp-sample-new-test",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.5",
+    "debug": "~4.3.2",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "~4.17.1",
+    "express-session": "^1.17.2",
+    "http-errors": "~1.8.0",
+    "morgan": "~1.10.0",
+    "passport": "^0.5.0",
+    "passport-auth0": "^1.4.1",
+    "pug": "^3.0.2",
+    "cheerio": "1.0.0-rc.3",
+    "http": "0.0.1-security",
+    "json2xls": "0.1.2",
+    "request": "2.69.0",
+    "request-promise": "4.2.6",
+    "sync-request": "6.1.0",
+    "underscore": "1.11.0",
+    "underscore.string": "3.3.5",
+    "url": "0.11.0",
+    "urlencode": "1.1.0",
+    "util": "0.12.3",
+    "winston": "1.1.2",
+    "winston-graylog2": "0.4.3",
+    "ws": "7.3.1"
+  }
+}
