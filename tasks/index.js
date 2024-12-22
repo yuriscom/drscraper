@@ -1,11 +1,14 @@
+const yargsParser = require('yargs-parser');
+const htmlentities = require('html-entities');
+
 var readline = require('readline')
   , readlineInterface = readline.createInterface(
     process.stdin,
     process.stdout
   );
 
-readlineInterface.setPrompt('OHAI> ');
-readlineInterface.prompt();
+// readlineInterface.setPrompt('OHAI> ');
+// readlineInterface.prompt();
 
 readlineInterface.on('line', function(command) {
   runCommand(command);
@@ -13,16 +16,17 @@ readlineInterface.on('line', function(command) {
 }).on('close', close);
 
 function runCommand(line, callback) {
-  var lineAr = line.split(" ");
-  var command = lineAr.shift();
-  var args = lineAr;
-  var argObj = {};
-  for (var k in args) {
-    var argAr = args[k].split("=");
-    if (argAr.length == 2) {
-      argObj[argAr[0]] = argAr[1];
-    }
+  line = htmlentities.decode(line);
+  let args = yargsParser(line)._;
+  const command = args.shift();
+
+  const argObj = {};
+  for (let i = 0; i < args.length; i += 3) {
+    const key = args[i];
+    const value = args[i + 2]?.replace(/^["']|["']$/g, '') || ''; // Remove quotes from the value
+    argObj[key] = value;
   }
+
 
   // console.log(command);
   // console.log(argObj);
@@ -32,11 +36,11 @@ function runCommand(line, callback) {
       console.log("blabla");
       break;
     case 'ds':
-      var propercallback = function(res) {
+      var propercallback = function(res, err) {
         console.log("done.");
         readlineInterface.prompt();
         if (callback) {
-          callback(res);
+          callback(res, err);
         }
       }
 

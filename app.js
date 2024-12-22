@@ -23,7 +23,7 @@ var dataRouter = require('./routes/data');
 var fileRouter = require('./routes/file');
 // var usersRouter = require('./routes/users');
 
-dotenv.config();
+dotenv.config({path:__dirname+'/.env'});
 
 // Configure Passport to use Auth0
 var strategy = new Auth0Strategy(
@@ -151,8 +151,12 @@ var wss = new WebSocketServer({host:process.env.WSHOST, port: 9090});
 wss.on('connection', function (ws) {
   ws.on('message', function (message) {
     console.log("message received. starting task.");
-    tasks.runCommand(message, function (res) {
-      ws.send(res);
+    tasks.runCommand(message, function (res, err) {
+      if (err) {
+        ws.send(JSON.stringify({error: err.message})); // Convert JSON to string
+      } else {
+        ws.send(JSON.stringify({filePath: res})); // Wrap response in a JSON object
+      }
     });
   });
 });

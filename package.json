@@ -6,6 +6,8 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "axios": "1.7.9",
+    "cheerio": "1.0.0-rc.3",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.5",
     "debug": "~4.3.2",
@@ -13,14 +15,15 @@
     "ejs": "^3.1.6",
     "express": "~4.17.1",
     "express-session": "^1.17.2",
+    "html-entities": "^2.5.2",
+    "http": "0.0.1-security",
     "http-errors": "~1.8.0",
+    "json2xls": "^0.1.2",
     "morgan": "~1.10.0",
     "passport": "^0.5.0",
     "passport-auth0": "^1.4.1",
     "pug": "^3.0.2",
-    "cheerio": "1.0.0-rc.3",
-    "http": "0.0.1-security",
-    "json2xls": "0.1.2",
+    "puppeteer": "23.10.4",
     "request": "2.69.0",
     "request-promise": "4.2.6",
     "sync-request": "6.1.0",
@@ -31,6 +34,7 @@
     "util": "0.12.3",
     "winston": "1.1.2",
     "winston-graylog2": "0.4.3",
-    "ws": "7.3.1"
+    "ws": "7.3.1",
+    "yargs-parser": "^21.1.1"
   }
 }
