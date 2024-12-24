@@ -7,21 +7,29 @@ function Puppet() {
 var prot = Puppet.prototype;
 
 
-prot.test = async function(url) {
+prot.test = async function (url) {
 
-  const browser = await puppeteer.launch({ headless: false });
+  //if (process.env.NODE_ENV === 'production') {}
+
+  const browser = await puppeteer.launch({headless: false});
   const page = await browser.newPage();
   await page.goto(url, {waitUntil: 'networkidle2'});
 
   await browser.close();
   return;
-
 }
 
 prot.runSearchWithPagination = async function (url, options = {}) {
-  const { specialty, city, postalCode } = options;
+  const {specialty, city, postalCode} = options;
 
-  browser = await puppeteer.launch({headless: false});
+  let puppeteerConfig = {};
+  if (process.env.ENV === 'local') {
+    puppeteerConfig = {headless: true};
+  } else {
+    puppeteerConfig = {args: ['--no-sandbox', '--disable-setuid-sandbox']};
+  }
+
+  browser = await puppeteer.launch(puppeteerConfig);
   page = await browser.newPage();
 
   // Navigate to the CPSO Advanced Search page
@@ -63,8 +71,8 @@ prot.runSearchWithPagination = async function (url, options = {}) {
   } else if (postalCode) {
     try {
       const postalCodeSelector = '#postalCode';
-      await page.waitForSelector(postalCodeSelector, { timeout: 5000 });
-      await page.type(postalCodeSelector, postalCode.trim(), { delay: 100 });
+      await page.waitForSelector(postalCodeSelector, {timeout: 5000});
+      await page.type(postalCodeSelector, postalCode.trim(), {delay: 100});
       console.log(`Entered postal code: "${postalCode}".`);
     } catch (err) {
       console.error(`Error entering postal code "${postalCode}":`, err.message);
@@ -99,7 +107,7 @@ prot.runSearchWithPagination = async function (url, options = {}) {
 }
 
 
-prot.collectAllPages = async function(page) {
+prot.collectAllPages = async function (page) {
   const pagesData = [];
 
   let currentPageNumber = 1;
@@ -148,7 +156,7 @@ prot.collectAllPages = async function(page) {
         const selectedOption = document.querySelector('#pagination-controls #page-select option[selected]');
         return selectedOption && selectedOption.value === expectedValue;
       },
-      { timeout: 30000 },
+      {timeout: 30000},
       expectedValue
     );
 
