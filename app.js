@@ -115,7 +115,8 @@ app.get('/getfile', fileRouter);
 
 // Catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  const err = new Error(`Not Found url ${req.url}`);
+  var ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  const err = new Error(`404 Not Found url ${req.url} from ip ${ip}`);
   err.status = 404;
   next(err);
 });
