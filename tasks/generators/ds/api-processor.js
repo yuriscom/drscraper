@@ -109,9 +109,10 @@ prot.search = async function () {
   let self = this;
   const url = baseUrl + '/Advanced-Search/';
   let responses = await puppet.runSearchWithPagination(url, {
+    doctorType: self.params['doctorType'],
     specialty: self.params['spec'],
     city: self.params['city'],
-    postalCode: self.params['postalCode']
+    postalCode: self.params['postal']
   });
 
   return responses;
@@ -162,10 +163,12 @@ prot.collectDoctorInfoPagesContent = async function (hrefs) {
 }
 
 prot.getFilename = function () {
+  let doctorType = (this.params.doctorType ? this.params.doctorType + '' : 'family');
   let spec = (this.params.spec ? this.params.spec + '' : '0');
+  let isFamily = doctorType == 'family' && spec == '0'
   let city = (this.params.city ? this.params.city + '' : '0');
   let postal = (this.params.postal ? this.params.postal + '' : '0');
-  return 'data_spec' + spec + '_city' + city + '_postal' + postal + '.xlsx';
+  return 'data_spec' + (isFamily ? 'family' : spec) + '_city' + city + '_postal' + postal + '.xlsx';
 }
 
 exports = module.exports = ApiProcessor;

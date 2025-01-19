@@ -20,548 +20,90 @@
             padding-left: 170px;
             padding-top: 20px;
         }
+
+        .radio-group {
+            display: flex;
+            align-items: center;
+            gap: 0px;
+        }
+
+        .radio-group input[type="radio"] {
+            width: 30px;
+        }
     </style>
 </head>
 <body>
 <%- include('navbar.ejs') %>
-<%if (user) {%>
-<form action="/scrape" method="get" enctype="multipart/form-data">
-    <fieldset>
-        <table>
-            <tr>
-                <td>
-                    <label for="spec">Specialization:</label>
-                </td>
-                <td>
-                    <select name="spec" id="spec">
-                        <option selected="selected" value="">Select --&gt;</option>
-                        <option value="Addiction Medicine">Addiction Medicine</option>
-
-                        <option value="Adolescent Medicine">Adolescent Medicine</option>
-
-                        <option value="Anatomical Pathology">Anatomical Pathology</option>
-
-                        <option value="Anesthesiology">Anesthesiology</option>
-
-                        <option value="Bacteriology">Bacteriology</option>
-
-                        <option value="Cardiac Surgery">Cardiac Surgery</option>
-
-                        <option value="Cardiology">Cardiology</option>
-
-                        <option value="Cardiothoracic Surgery">Cardiothoracic Surgery</option>
-
-                        <option value="Cardiovascular and Thoracic Surgery">Cardiovascular and Thoracic Surgery</option>
-
-                        <option value="Child and Adolescent Psychiatry">Child and Adolescent Psychiatry</option>
-
-                        <option value="Clinical Immunology">Clinical Immunology</option>
-
-                        <option value="Clinical Immunology and Allergy">Clinical Immunology and Allergy</option>
-
-                        <option value="Clinical Pharmacology">Clinical Pharmacology</option>
-
-                        <option value="Clinical Pharmacology and Toxicology">Clinical Pharmacology and Toxicology</option>
-
-                        <option value="Clinician Investigator Program">Clinician Investigator Program</option>
-
-                        <option value="Colorectal Surgery">Colorectal Surgery</option>
-
-                        <option value="Community Medicine">Community Medicine</option>
-
-                        <option value="Critical Care Medicine ">Critical Care Medicine </option>
-
-                        <option value="Dermatology">Dermatology</option>
-
-                        <option value="Developmental Pediatrics">Developmental Pediatrics</option>
-
-                        <option value="Diagnostic and Clinical Pathology">Diagnostic and Clinical Pathology</option>
-
-                        <option value="Diagnostic and Molecular Pathology">Diagnostic and Molecular Pathology</option>
-
-                        <option value="Diagnostic and Therapeutic Radiology">Diagnostic and Therapeutic Radiology</option>
-
-                        <option value="Diagnostic Radiology">Diagnostic Radiology</option>
-
-                        <option value="Emergency Medicine">Emergency Medicine</option>
-
-                        <option value="Endocrinology and Metabolism">Endocrinology and Metabolism</option>
-
-                        <option value="Family Medicine ">Family Medicine </option>
-
-                        <option value="Family Medicine (Emergency Medicine)">Family Medicine (Emergency Medicine)</option>
-
-                        <option value="FCFP - Family Medicine">FCFP - Family Medicine</option>
-
-                        <option value="Forensic Pathology">Forensic Pathology</option>
-
-                        <option value="Forensic Psychiatry">Forensic Psychiatry</option>
-
-                        <option value="Gastroenterology">Gastroenterology</option>
-
-                        <option value="General Internal Medicine">General Internal Medicine</option>
-
-                        <option value="General Pathology">General Pathology</option>
-
-                        <option value="General Surgery">General Surgery</option>
-
-                        <option value="General Surgical Oncology">General Surgical Oncology</option>
-
-                        <option value="Geriatric Medicine">Geriatric Medicine</option>
-
-                        <option value="Geriatric Psychiatry">Geriatric Psychiatry</option>
-
-                        <option value="Gynecologic Oncology  ">Gynecologic Oncology  </option>
-
-                        <option value="Gynecologic Reproductive Endocrinology/Infertility">Gynecologic Reproductive Endocrinology/Infertility</option>
-
-                        <option value="Hematological Pathology">Hematological Pathology</option>
-
-                        <option value="Hematology">Hematology</option>
-
-                        <option value="Hyperbaric Medicine">Hyperbaric Medicine</option>
-
-                        <option value="Infectious Diseases">Infectious Diseases</option>
-
-                        <option value="Internal Medicine">Internal Medicine</option>
-
-                        <option value="Interventional Radiology">Interventional Radiology</option>
-
-                        <option value="Laboratory Medicine">Laboratory Medicine</option>
-
-                        <option value="Maternal Fetal Medicine">Maternal Fetal Medicine</option>
-
-                        <option value="Medical Biochemistry">Medical Biochemistry</option>
-
-                        <option value="Medical Genetics and Genomics">Medical Genetics and Genomics</option>
-
-                        <option value="Medical Microbiology">Medical Microbiology</option>
-
-                        <option value="Medical Oncology">Medical Oncology</option>
-
-                        <option value="Neonatal-Perinatal Medicine ">Neonatal-Perinatal Medicine </option>
-
-                        <option value="Nephrology">Nephrology</option>
-
-                        <option value="Neurology">Neurology</option>
-
-                        <option value="Neuropathology ">Neuropathology </option>
-
-                        <option value="Neuroradiology">Neuroradiology</option>
-
-                        <option value="Neurosurgery">Neurosurgery</option>
-
-                        <option value="Nuclear Medicine">Nuclear Medicine</option>
-
-                        <option value="Obstetrics and Gynecology">Obstetrics and Gynecology</option>
-
-                        <option value="Occupational Medicine">Occupational Medicine</option>
-
-                        <option value="Ophthalmology">Ophthalmology</option>
-
-                        <option value="Orthopedic Surgery">Orthopedic Surgery</option>
-
-                        <option value="Otolaryngology - Head and Neck Surgery">Otolaryngology - Head and Neck Surgery</option>
-
-                        <option value="Pain Medicine">Pain Medicine</option>
-
-                        <option value="Palliative Medicine ">Palliative Medicine </option>
-
-                        <option value="Pathology and Bacteriology">Pathology and Bacteriology</option>
-
-                        <option value="Pediatric Cardiology  ">Pediatric Cardiology  </option>
-
-                        <option value="Pediatric Critical Care Medicine">Pediatric Critical Care Medicine</option>
-
-                        <option value="Pediatric Emergency Medicine">Pediatric Emergency Medicine</option>
-
-                        <option value="Pediatric Endocrinology and Metabolism">Pediatric Endocrinology and Metabolism</option>
-
-                        <option value="Pediatric Gastroenterology">Pediatric Gastroenterology</option>
-
-                        <option value="Pediatric General Surgery">Pediatric General Surgery</option>
-
-                        <option value="Pediatric Hematology/Oncology  ">Pediatric Hematology/Oncology  </option>
-
-                        <option value="Pediatric Infectious Diseases">Pediatric Infectious Diseases</option>
-
-                        <option value="Pediatric Neurology">Pediatric Neurology</option>
-
-                        <option value="Pediatric Radiology">Pediatric Radiology</option>
-
-                        <option value="Pediatric Respirology">Pediatric Respirology</option>
-
-                        <option value="Pediatric Rheumatology">Pediatric Rheumatology</option>
-
-                        <option value="Pediatric Surgery">Pediatric Surgery</option>
-
-                        <option value="Pediatrics">Pediatrics</option>
-
-                        <option value="Physical Medicine and Rehabilitation">Physical Medicine and Rehabilitation</option>
-
-                        <option value="Plastic Surgery">Plastic Surgery</option>
-
-                        <option value="Prehospital and Transport Medicine">Prehospital and Transport Medicine</option>
-
-                        <option value="Psychiatry">Psychiatry</option>
-
-                        <option value="Public Health">Public Health</option>
-
-                        <option value="Public Health and Preventive Medicine">Public Health and Preventive Medicine</option>
-
-                        <option value="Radiation Oncology">Radiation Oncology</option>
-
-                        <option value="Respirology">Respirology</option>
-
-                        <option value="Rheumatology">Rheumatology</option>
-
-                        <option value="Sport and Exercise Medicine">Sport and Exercise Medicine</option>
-
-                        <option value="Surgical Foundations">Surgical Foundations</option>
-
-                        <option value="Thoracic Surgery">Thoracic Surgery</option>
-
-                        <option value="Urology">Urology</option>
-
-                        <option value="Vascular Surgery">Vascular Surgery</option>
-                    </select>
-                </td>
-            </tr>
-            <td>
-                <label for="city">Select a City or Town:</label>
-            </td>
-            <td>
-                <select name="city" id="city">
-                    <option selected="selected" value="">Select --&gt;</option>
-                    <option value="Ajax">Ajax</option>
-
-                    <option value="Alexandria">Alexandria</option>
-
-                    <option value="Alliston">Alliston</option>
-
-                    <option value="Almonte">Almonte</option>
-
-                    <option value="Arnprior">Arnprior</option>
-
-                    <option value="Atikokan">Atikokan</option>
-
-                    <option value="Attawapiskat">Attawapiskat</option>
-
-                    <option value="Bancroft">Bancroft</option>
-
-                    <option value="Barrie">Barrie</option>
-
-                    <option value="Barry's Bay">Barry's Bay</option>
-
-                    <option value="Belleville">Belleville</option>
-
-                    <option value="Blind River">Blind River</option>
-
-                    <option value="Bowmanville">Bowmanville</option>
-
-                    <option value="Bracebridge">Bracebridge</option>
-
-                    <option value="Brampton">Brampton</option>
-
-                    <option value="Brantford">Brantford</option>
-
-                    <option value="Brockville">Brockville</option>
-
-                    <option value="Burlington">Burlington</option>
-
-                    <option value="Cambridge">Cambridge</option>
-
-                    <option value="Campbellford">Campbellford</option>
-
-                    <option value="Carleton Place">Carleton Place</option>
-
-                    <option value="Chapleau">Chapleau</option>
-
-                    <option value="Chatham">Chatham</option>
-
-                    <option value="Chesley">Chesley</option>
-
-                    <option value="Clinton">Clinton</option>
-
-                    <option value="Cobourg">Cobourg</option>
-
-                    <option value="Cochrane">Cochrane</option>
-
-                    <option value="Collingwood">Collingwood</option>
-
-                    <option value="Cornwall">Cornwall</option>
-
-                    <option value="Deep River">Deep River</option>
-
-                    <option value="Dryden">Dryden</option>
-
-                    <option value="Dunnville">Dunnville</option>
-
-                    <option value="Durham">Durham</option>
-
-                    <option value="Elliot Lake">Elliot Lake</option>
-
-                    <option value="Emo">Emo</option>
-
-                    <option value="Englehart">Englehart</option>
-
-                    <option value="Espanola">Espanola</option>
-
-                    <option value="Exeter">Exeter</option>
-
-                    <option value="Fergus">Fergus</option>
-
-                    <option value="Fort Albany">Fort Albany</option>
-
-                    <option value="Fort Erie">Fort Erie</option>
-
-                    <option value="Fort Frances">Fort Frances</option>
-
-                    <option value="Georgetown">Georgetown</option>
-
-                    <option value="Geraldton">Geraldton</option>
-
-                    <option value="Goderich">Goderich</option>
-
-                    <option value="Greater Sudbury">Greater Sudbury</option>
-
-                    <option value="Grimsby">Grimsby</option>
-
-                    <option value="Guelph">Guelph</option>
-
-                    <option value="Hagersville">Hagersville</option>
-
-                    <option value="Haliburton">Haliburton</option>
-
-                    <option value="Hamilton">Hamilton</option>
-
-                    <option value="Hanover">Hanover</option>
-
-                    <option value="Hawkesbury">Hawkesbury</option>
-
-                    <option value="Hearst">Hearst</option>
-
-                    <option value="Hornepayne">Hornepayne</option>
-
-                    <option value="Huntsville">Huntsville</option>
-
-                    <option value="Ingersoll">Ingersoll</option>
-
-                    <option value="Iroquois Falls">Iroquois Falls</option>
-
-                    <option value="Kapuskasing">Kapuskasing</option>
-
-                    <option value="Kemptville">Kemptville</option>
-
-                    <option value="Kenora">Kenora</option>
-
-                    <option value="Kincardine">Kincardine</option>
-
-                    <option value="Kingston">Kingston</option>
-
-                    <option value="Kirkland Lake">Kirkland Lake</option>
-
-                    <option value="Kitchener">Kitchener</option>
-
-                    <option value="Leamington">Leamington</option>
-
-                    <option value="Lindsay">Lindsay</option>
-
-                    <option value="Lions Head">Lions Head</option>
-
-                    <option value="Listowel">Listowel</option>
-
-                    <option value="Little Current">Little Current</option>
-
-                    <option value="London">London</option>
-
-                    <option value="Manitouwadge">Manitouwadge</option>
-
-                    <option value="Marathon">Marathon</option>
-
-                    <option value="Markdale">Markdale</option>
-
-                    <option value="Markham">Markham</option>
-
-                    <option value="Matheson">Matheson</option>
-
-                    <option value="Mattawa">Mattawa</option>
-
-                    <option value="Meaford">Meaford</option>
-
-                    <option value="Midland">Midland</option>
-
-                    <option value="Milton">Milton</option>
-
-                    <option value="Mindemoya">Mindemoya</option>
-
-                    <option value="Minden">Minden</option>
-
-                    <option value="Mississauga">Mississauga</option>
-
-                    <option value="Moose Factory">Moose Factory</option>
-
-                    <option value="Moosonee">Moosonee</option>
-
-                    <option value="Mount Forest">Mount Forest</option>
-
-                    <option value="Napanee">Napanee</option>
-
-                    <option value="New Liskeard">New Liskeard</option>
-
-                    <option value="Newbury">Newbury</option>
-
-                    <option value="Newmarket">Newmarket</option>
-
-                    <option value="Niagara Falls">Niagara Falls</option>
-
-                    <option value="Niagara-on-the-lake">Niagara-on-the-lake</option>
-
-                    <option value="Nipigon">Nipigon</option>
-
-                    <option value="North Bay">North Bay</option>
-
-                    <option value="Oakville">Oakville</option>
-
-                    <option value="Orangeville">Orangeville</option>
-
-                    <option value="Orillia">Orillia</option>
-
-                    <option value="Oshawa">Oshawa</option>
-
-                    <option value="Ottawa">Ottawa</option>
-
-                    <option value="Owen Sound">Owen Sound</option>
-
-                    <option value="Palmerston">Palmerston</option>
-
-                    <option value="Paris">Paris</option>
-
-                    <option value="Parry Sound">Parry Sound</option>
-
-                    <option value="Pembroke">Pembroke</option>
-
-                    <option value="Penetanguishene">Penetanguishene</option>
-
-                    <option value="Perth">Perth</option>
-
-                    <option value="Peterborough">Peterborough</option>
-
-                    <option value="Petrolia">Petrolia</option>
-
-                    <option value="Picton">Picton</option>
-
-                    <option value="Port Colborne">Port Colborne</option>
-
-                    <option value="Port Perry">Port Perry</option>
-
-                    <option value="Rainy River">Rainy River</option>
-
-                    <option value="Red Lake">Red Lake</option>
-
-                    <option value="Renfrew">Renfrew</option>
-
-                    <option value="Richards Landing">Richards Landing</option>
-
-                    <option value="Richmond Hill">Richmond Hill</option>
-
-                    <option value="Sarnia">Sarnia</option>
-
-                    <option value="Sault Ste. Marie">Sault Ste. Marie</option>
-
-                    <option value="Seaforth">Seaforth</option>
-
-                    <option value="Simcoe">Simcoe</option>
-
-                    <option value="Sioux Lookout">Sioux Lookout</option>
-
-                    <option value="Smiths Falls">Smiths Falls</option>
-
-                    <option value="Smooth Rock Falls">Smooth Rock Falls</option>
-
-                    <option value="Southampton">Southampton</option>
-
-                    <option value="St Catharines">St Catharines</option>
-
-                    <option value="St Marys">St Marys</option>
-
-                    <option value="St Thomas">St Thomas</option>
-
-                    <option value="Stratford">Stratford</option>
-
-                    <option value="Strathroy">Strathroy</option>
-
-                    <option value="Sturgeon Falls">Sturgeon Falls</option>
-
-                    <option value="Sudbury">Sudbury</option>
-
-                    <option value="Terrace Bay">Terrace Bay</option>
-
-                    <option value="Thessalon">Thessalon</option>
-
-                    <option value="Thunder Bay">Thunder Bay</option>
-
-                    <option value="Tillsonburg">Tillsonburg</option>
-
-                    <option value="Timmins">Timmins</option>
-
-                    <option value="Toronto">Toronto</option>
-
-                    <option value="Trenton">Trenton</option>
-
-                    <option value="Uxbridge">Uxbridge</option>
-
-                    <option value="Vaughan">Vaughan</option>
-
-                    <option value="Walkerton">Walkerton</option>
-
-                    <option value="Wallaceburg">Wallaceburg</option>
-
-                    <option value="Wawa">Wawa</option>
-
-                    <option value="Welland">Welland</option>
-
-                    <option value="Whitby">Whitby</option>
-
-                    <option value="Wiarton">Wiarton</option>
-
-                    <option value="Winchester">Winchester</option>
-
-                    <option value="Windsor">Windsor</option>
-
-                    <option value="Wingham">Wingham</option>
-
-                    <option value="Woodstock">Woodstock</option>
-                </select>
-            </td>
-            </tr>
-            <tr><td colspan="2">OR</td></tr>
-            <tr>
-                <td>
-                    <label for="postal">Enter the first three characters of a postal code:</label>
-                </td>
-                <td>
-                    <input name="postal" type="text" maxlength="3" id="postal">
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" class="btn"><input class="button" type="submit" value="Go..."/></td>
-            </tr>
-        </table>
-    </fieldset>
-</form>
-<script>
-  document.getElementById('postal').onkeypress = function(event) {
-    var regex = new RegExp("^[a-zA-Z0-9]+$");
-    var key = String.fromCharCode(event.keyCode);
-    if (!regex.test(key)) {
-      event.preventDefault();
-      return false;
-    }
-  }
-</script>
-<%} else {%>
+<% if (user) { %>
+    <form action="/scrape" method="get" enctype="multipart/form-data">
+        <fieldset>
+            <table>
+                <tr>
+                    <td><label for="doctor-type">Select Doctor Type:</label></td>
+                    <td>
+                        <div class="radio-group">
+                            <input type="radio" id="familyDoctor" name="doctorType" value="family" onclick="toggleSpecialization(false)" checked />
+                            <label for="familyDoctor">Family Doctor</label>
+                            <input type="radio" id="specialization" name="doctorType" value="spec" onclick="toggleSpecialization(true)" />
+                            <label for="specialization">Specialization</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr id="specialization-row" style="display: none;">
+                    <td>
+                        <label for="spec">Specialization:</label>
+                    </td>
+                    <td>
+                        <select name="spec" id="spec">
+                            <%- include('partials/specialties.ejs') %>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="city">Select a City or Town:</label></td>
+                    <td>
+                        <select name="city" id="city">
+                            <%- include('partials/cities.ejs') %>
+                        </select>
+                    </td>
+                </tr>
+                <tr><td colspan="2">OR</td></tr>
+                <tr>
+                    <td>
+                        <label for="postal">Enter the first three characters of a postal code:</label>
+                    </td>
+                    <td>
+                        <input name="postal" type="text" maxlength="3" id="postal">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="btn"><input class="button" type="submit" value="Go..."/></td>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+    <script>
+      // Toggles the display of the specialization dropdown based on the radio button selection
+      function toggleSpecialization(show) {
+        const specializationRow = document.getElementById('specialization-row');
+        if (show) {
+          specializationRow.style.display = '';
+        } else {
+          specializationRow.style.display = 'none';
+        }
+      }
+
+      document.getElementById('postal').onkeypress = function(event) {
+        var regex = new RegExp("^[a-zA-Z0-9]+$");
+        var key = String.fromCharCode(event.keyCode);
+        if (!regex.test(key)) {
+          event.preventDefault();
+          return false;
+        }
+      }
+    </script>
+<% } else { %>
     <h4>You are not logged in! Please <a href="/login">Log In</a> to continue</h4>
-<%} %>
+<% } %>
 </body>
 </html>

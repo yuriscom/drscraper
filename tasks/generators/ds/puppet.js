@@ -11,7 +11,7 @@ prot.test = async function (url) {
 
   //if (process.env.NODE_ENV === 'production') {}
 
-  const browser = await puppeteer.launch({headless: false});
+  const browser = await puppeteer.launch({headless: true});
   const page = await browser.newPage();
   await page.goto(url, {waitUntil: 'networkidle2'});
 
@@ -20,11 +20,11 @@ prot.test = async function (url) {
 }
 
 prot.runSearchWithPagination = async function (url, options = {}) {
-  const {specialty, city, postalCode} = options;
+  const {doctorType, specialty, city, postalCode} = options;
 
   let puppeteerConfig = {};
   if (process.env.ENV === 'local') {
-    puppeteerConfig = {headless: true};
+    puppeteerConfig = {headless: false};
   } else {
     puppeteerConfig = {args: ['--no-sandbox', '--disable-setuid-sandbox']};
   }
@@ -35,7 +35,17 @@ prot.runSearchWithPagination = async function (url, options = {}) {
   // Navigate to the CPSO Advanced Search page
   await page.goto(url, {waitUntil: 'networkidle2'});
 
-  if (specialty) {
+  if (doctorType === 'family') {
+    // Select the radio button with id="doctorTypeFamily"
+    try {
+      const radioButtonSelector = '#doctorTypeFamily';
+      await page.waitForSelector(radioButtonSelector, {timeout: 5000});
+      await page.click(radioButtonSelector);
+      console.log('Selected radio button for Family Doctor');
+    } catch (err) {
+      console.error('Error selecting the radio button:', err.message);
+    }
+  } else if (specialty) {
     // Select the radio button with id="doctorTypeSpecialist"
     try {
       const radioButtonSelector = '#doctorTypeSpecialist';
