@@ -24,11 +24,13 @@ prot.runSearchWithPagination = async function (url, options = {}) {
 
   let puppeteerConfig = {};
   if (process.env.ENV === 'local') {
-    puppeteerConfig = {headless: false};
+    puppeteerConfig = { headless: false };
   } else {
-    puppeteerConfig = {args: ['--no-sandbox', '--disable-setuid-sandbox']};
+    puppeteerConfig = {
+      headless: true, // Explicitly set headless mode for production
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    };
   }
-
   browser = await puppeteer.launch(puppeteerConfig);
   page = await browser.newPage();
 
