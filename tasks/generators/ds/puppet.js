@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-
+const waitForSelectorTimeoutMs = 10000
 function Puppet() {
 
 }
@@ -41,7 +41,7 @@ prot.runSearchWithPagination = async function (url, options = {}) {
     // Select the radio button with id="doctorTypeFamily"
     try {
       const radioButtonSelector = '#doctorTypeFamily';
-      await page.waitForSelector(radioButtonSelector, {timeout: 5000});
+      await page.waitForSelector(radioButtonSelector, {timeout: waitForSelectorTimeoutMs});
       await page.click(radioButtonSelector);
       console.log('Selected radio button for Family Doctor');
     } catch (err) {
@@ -51,7 +51,7 @@ prot.runSearchWithPagination = async function (url, options = {}) {
     // Select the radio button with id="doctorTypeSpecialist"
     try {
       const radioButtonSelector = '#doctorTypeSpecialist';
-      await page.waitForSelector(radioButtonSelector, {timeout: 5000});
+      await page.waitForSelector(radioButtonSelector, {timeout: waitForSelectorTimeoutMs});
       await page.click(radioButtonSelector);
       console.log('Selected radio button for Specialist');
     } catch (err) {
@@ -61,7 +61,7 @@ prot.runSearchWithPagination = async function (url, options = {}) {
     // Select dropdown with id="specialistType"
     try {
       const specialistTypeSelector = '#specialistType';
-      await page.waitForSelector(specialistTypeSelector, {timeout: 5000});
+      await page.waitForSelector(specialistTypeSelector, {timeout: waitForSelectorTimeoutMs});
       await page.select(specialistTypeSelector, specialty);
       console.log(`Selected ${specialty} in the specialist type dropdown`);
     } catch (err) {
@@ -74,7 +74,7 @@ prot.runSearchWithPagination = async function (url, options = {}) {
     // Select "Toronto" in the dropdown with id="hospitalLocation"
     try {
       const dropdownSelector = '#hospitalLocation';
-      await page.waitForSelector(dropdownSelector, {timeout: 5000});
+      await page.waitForSelector(dropdownSelector, {timeout: waitForSelectorTimeoutMs});
       await page.select(dropdownSelector, city);
       console.log(`Selected ${city} in the dropdown`);
     } catch (err) {
@@ -83,7 +83,7 @@ prot.runSearchWithPagination = async function (url, options = {}) {
   } else if (postalCode) {
     try {
       const postalCodeSelector = '#postalCode';
-      await page.waitForSelector(postalCodeSelector, {timeout: 5000});
+      await page.waitForSelector(postalCodeSelector, {timeout: waitForSelectorTimeoutMs});
       await page.type(postalCodeSelector, postalCode.trim(), {delay: 100});
       console.log(`Entered postal code: "${postalCode}".`);
     } catch (err) {
@@ -94,7 +94,7 @@ prot.runSearchWithPagination = async function (url, options = {}) {
   // Click the submit button with class "search-button" under "search-buttons"
   try {
     const specificSubmitButtonSelector = '.search-buttons .search-button';
-    await page.waitForSelector(specificSubmitButtonSelector, {timeout: 5000});
+    await page.waitForSelector(specificSubmitButtonSelector, {timeout: waitForSelectorTimeoutMs});
     await page.click(specificSubmitButtonSelector);
     console.log('Clicked the submit button');
   } catch (err) {
@@ -103,7 +103,7 @@ prot.runSearchWithPagination = async function (url, options = {}) {
 
   // Wait for the response and capture the HTML
   try {
-    await page.waitForNavigation({waitUntil: 'networkidle2', timeout: 15000});
+    await page.waitForNavigation({waitUntil: 'networkidle2', timeout: 20000});
     responseHTML = await page.content(); // Capture the full page HTML
     console.log('HTML response captured successfully');
   } catch (err) {
