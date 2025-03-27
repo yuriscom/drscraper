@@ -103,7 +103,7 @@ prot.runSearchWithPagination = async function (url, options = {}) {
 
   // Wait for the response and capture the HTML
   try {
-    await page.waitForNavigation({waitUntil: 'networkidle2', timeout: 10000});
+    await page.waitForNavigation({waitUntil: 'networkidle2', timeout: 15000});
     responseHTML = await page.content(); // Capture the full page HTML
     console.log('HTML response captured successfully');
   } catch (err) {
