@@ -11,6 +11,7 @@ function cleanValue(value) {
 var prot = DoctorParser.prototype;
 
 prot.parseDoctorDetails = function (html, url) {
+  console.log("Parsing URL: " + url)
   const doctor = {
     id: '',
     url: url,
@@ -120,42 +121,42 @@ prot.parseDoctorDetails = function (html, url) {
   return doctor;
 }
 
-prot.parseDoctorAddress = function(addressText) {
-  let addressObj = {
-    city: "",
-    province: "",
-    postal: "",
-    address: "",
-    address2: "",
+prot.parseDoctorAddress = function (addressHtml) {
+  const doctor = {
+    address: '',
+    address2: '',
+    city: '',
+    province: '',
+    postal: ''
+  };
+
+  if (!addressHtml) return doctor;
+
+  const addressLines = addressHtml
+    .split('<br>')
+    .map(line => cleanValue(line))
+    .filter(Boolean);
+
+  if (addressLines.length === 0) return doctor;
+
+  const lastLine = addressLines[addressLines.length - 1];
+
+  // Flexible Canadian address regex: city [province]? postal
+  const addressRegex = /^([\w\s'.-]+?)\s*(ON|Ontario)?\s+([A-Z]\d[A-Z]\s?\d[A-Z]\d)$/i;
+  const match = addressRegex.exec(lastLine);
+
+  if (match) {
+    doctor.city = match[1].trim();
+    doctor.province = match[2] ? (match[2] === 'Ontario' ? 'ON' : match[2]) : '';
+    doctor.postal = match[3].toUpperCase();
+    doctor.address = addressLines[0];
+    doctor.address2 = addressLines.slice(1, addressLines.length - 1).join(', ');
+  } else {
+    // fallback: put entire block in 'address'
+    doctor.address = addressLines.join(', ');
   }
 
-  if (addressText) {
-    const addressLines = addressText.split('<br>').map(line => cleanValue(line));
-    const lastLine = addressLines.pop(); // Extract the last line containing city, province, and postal code
-
-    const addressRegex = /^(.*)+\s([A-Z]\d[A-Z]\s?\d[A-Z]\d)$/;
-    const match = addressRegex.exec(lastLine);
-
-    if (match) {
-      let cityAndProvince = match[1];
-      const cityAndProvinceAr = cityAndProvince.split(" ");
-      if (cityAndProvinceAr.length > 1) {
-        addressObj.province = cityAndProvinceAr.pop();
-        addressObj.city = cityAndProvinceAr.join(" ");
-      } else {
-        addressObj.city = cityAndProvince;
-      }
-
-      addressObj.postal = cleanValue(match[2]);
-
-      addressObj.address = cleanValue(addressLines.shift() || null); // The first element is the main address
-      addressObj.address2 = addressLines.length > 0 ? addressLines.join(', ') : null; // Combine all remaining lines
-    } else {
-      addressObj.address = addressText.replace(/<br>/g, ' ');
-    }
-  }
-
-  return addressObj;
+  return doctor;
 }
 
 exports = module.exports = new DoctorParser();
