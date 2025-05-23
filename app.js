@@ -61,7 +61,11 @@ app.set('views', path.join(__dirname, 'views_ejs'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 
-app.use(logger('dev'));
+app.use(logger('dev', {
+  skip: function (req, res) {
+    return res.statusCode >= 400;
+  }
+}));
 app.use(cookieParser());
 
 // config express-session
@@ -115,10 +119,15 @@ app.get('/getfile', fileRouter);
 
 // Catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  var ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-  const err = new Error(`404 Not Found url ${req.url} from ip ${ip}`);
-  err.status = 404;
-  next(err);
+  //var ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  //console.log(`404 Not Found url ${req.url} from ip ${ip}`);
+
+  // Send a simple JSON response instead of rendering HTML
+  res.status(404).json({
+    error: 'Not Found',
+    message: 'The requested resource was not found on this server.',
+    status: 404
+  });
 });
 
 // Error handlers
@@ -127,7 +136,7 @@ app.use(function (req, res, next) {
 // Will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function (err, req, res, next) {
-    console.log(err);
+    // console.log(err);
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
